@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project1_iremember/resources/constants.dart';
 import '../../resources/db_provider.dart';
 import '../../models/item_model.dart';
 
@@ -29,7 +30,12 @@ class _HomePageState extends State<HomePage> {
           if(!snapshot.hasData) return Center(child: CircularProgressIndicator(),);
           if(snapshot.hasError) return Center(child: Text("There was an error ${snapshot.error}" ),);
           List items = snapshot.data;
-
+          if(items.isEmpty) items = [{
+            columnId: 1,
+            columnImage: "img/36411.jpg",
+            columnTitle: "Test item",
+            columnDescription: "Test description is this. Thank you",
+          }];
           return ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: items.length,
